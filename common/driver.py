@@ -20,7 +20,7 @@ def browser():
     chrome_driver_path = chrome_driver_path.split('pic_project')[0] + '/pic_project/common/chromedriver.exe'
 
     driver = webdriver.Chrome(executable_path=chrome_driver_path, chrome_options=chrome_options)
-    driver.set_window_size(2062, 1126)
+    driver.set_window_size(1920, 1040)
     driver.set_window_position(0, 0)
     return driver
 

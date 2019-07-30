@@ -9,6 +9,7 @@ from time import sleep
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import requests
+import datetime
 
 class CommonFunction(BaseFunction):
     def mouse_above(self, element_path):
@@ -38,15 +39,42 @@ class CommonFunction(BaseFunction):
         :param element_path:  
         :return: 
         '''
-        js = "var q=document.documentElement.scrollTop=10000"
+        js = "var q=document.documentElement.scrollTop=1000"
         self.driver.execute_script(js)
         target = self.driver.find_element_by_xpath(element_path)
         self.driver.execute_script("arguments[0].scrollIntoView();", target)
         sleep(0.5)
 
+    def driver_execute_script01(self):
+        '''
+        当前滚动条向上移动500像素
+        :return: 
+        '''
+        js1 = 'var q=document.documentElement.scrollTop=500'
+        self.driver.execute_script(js1)
+
+    def driver_execute_script02(self):
+        '''
+        当前滚动条位置向下移动500像素
+        :return: 
+        '''
+        js2 = 'var location=document.documentElement.scrollTop;' \
+              'var b=document.documentElement.scrollTop=(location+300)'
+        self.driver.execute_script(js2)
+
+    def open_new_window(self):
+        '''
+        使用js新开页面
+        :return: 
+        '''
+        js = "window.open('https://www.58pic.com/')"
+        self.driver.execute_script(js)
+        time.sleep(1)
+
+
     def switch_to_frame(self, frame_id):
         '''
-        #跳进iframe
+        跳进iframe
         :param frame_id: 
         :return: 
         '''
@@ -57,6 +85,7 @@ class CommonFunction(BaseFunction):
         跳进新句柄
         :return: 
         '''
+        #获取当前句柄数
         handles = self.driver.window_handles
         if len(handles) < 2:
             return False
@@ -72,10 +101,12 @@ class CommonFunction(BaseFunction):
         '''
         try:
             sleep(1)
+            # 获取当前句柄数
             handles = self.driver.window_handles
             if len(handles) < 2:
                 return False
             else:
+                #句柄数大于1，关闭原来句柄，跳入新句柄
                 self.driver.close()
                 self.driver.switch_to_window(handles[len(handles) - 1])
                 sleep(1)
@@ -88,7 +119,7 @@ class CommonFunction(BaseFunction):
         获取帐号cookies
         :param user_name: 
         :param password: 
-        :return: 
+        :return: auth_id cookie, uid, referer
         '''
         #获取cookie接口
         login_by_passwd_new_request_url = 'https://www.58pic.com/index.php?m=userinfo&a=loginByPasswdNew'
@@ -118,7 +149,7 @@ class CommonFunction(BaseFunction):
         self.driver.get('https://www.58pic.com/index.php?m=HelpCenter&a=addQuestion')
         # 添加localstorage记录
         time_day = time.strftime('%d ', time.localtime(time.time()))
-        self.driver.get('https://www.58pic.com/index.php?m=HelpCenter')
+        # self.driver.get('https://www.58pic.com/index.php?m=HelpCenter')
         local_storge_data_JS = [
             'localStorage.setItem("is_show_guide", "1")',
             'localStorage.setItem("activBottom",%s)' % time_day,
@@ -129,6 +160,8 @@ class CommonFunction(BaseFunction):
             self.driver.execute_script(JS)
 
         expiry_time = 15488452170
+
+        now_time = datetime.datetime.now().day
 
         cookies = [
             {'domain': '.58pic.com', 'secure': True,
@@ -141,18 +174,19 @@ class CommonFunction(BaseFunction):
              'value': '%224ac7049f557063d01fbe2b259aeaac6g%22', 'httpOnly': False,
              'expiry': expiry_time, 'path': '/', 'name': 'qt_visitor_id'},
             {'domain': '.58pic.com', 'secure': False,
-             'value': 'patchOne%3A1%2CpatchTwo%3A0%2meEnd%3A0', 'httpOnly': False,
-             'expiry': expiry_time, 'path': '/', 'name': 'first-charge-' + str(user_id) + '_5'},
-            {'domain': '.58pic.com', 'secure': False,
              'value': user_referer, 'httpOnly': False,
-             'expiry': expiry_time, 'path': '/', 'name': 'referer'}
+             'expiry': expiry_time, 'path': '/', 'name': 'referer'},
+            {'domain': '.58pic.com', 'secure': False,
+             'value': 'patchOne%3A1%2CtimeOne%3A'+str(now_time)+'%2CtimeEnd%3A0', 'httpOnly': False,
+             'expiry': expiry_time, 'path': '/', 'name': 'first-charge-'+str(user_id)+'_7'}
         ]
-
+        #删除原来所有cookie
         self.driver.delete_all_cookies()
-
+        #循环写入cookie
         for cookie in cookies:
             self.driver.add_cookie(cookie)
-            self.driver.refresh()
+
+        self.driver.refresh()
 
     def user_login(self, user_name, password):
         '''
@@ -161,7 +195,9 @@ class CommonFunction(BaseFunction):
         :param password: 
         :return: 
         '''
+        #获取cookie
         user_info = self.get_user_cookies(user_name, password)
+        #写入cookie
         self.add_cookies(user_info[0], user_info[1], user_info[2])
 
     def catch_exception(origin_fun):

@@ -10,8 +10,10 @@ def do_test(cmd_command):
 
 if __name__ == '__main__':
 
-    cmd_command = ['pytest ' + os.getcwd() + '/test_vip.py --html=.\\..\\report\\report_vip.html --self-contained-html',
+    cmd_command = ['pytest ' + os.getcwd() + '/test_firsttop.py --html=.\\..\\report\\report_firsttop.html --self-contained-html',
                    ]
+    # cmd_command = ['pytest ' + os.getcwd() + '/test_vip.py --html=.\\..\\report\\report_vip.html --self-contained-html',
+    #                ]
     pool_num = 1
     pool = Pool(pool_num)
     for x in range(0,1):
