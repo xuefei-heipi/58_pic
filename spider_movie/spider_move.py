@@ -66,6 +66,7 @@ class SpiderMovie(object):
                 res = requests.post(url_3, headers=header_kuaishou, json=json_datas)
                 # print(res.json())
                 kuaishou_url = res.json()['data']['visionVideoDetail']['photo']['photoUrl']
+				print(2)
 
                 return kuaishou_url
         except:
