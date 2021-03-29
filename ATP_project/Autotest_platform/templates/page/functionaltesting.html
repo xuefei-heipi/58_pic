@@ -1,0 +1,291 @@
+﻿<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+{% load static %}
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>功能测试</title>
+    <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet"/>
+    <link href="{% static 'assets/css/font-awesome.css' %}" rel="stylesheet"/>
+    <link href="{% static 'assets/js/morris/morris-0.4.3.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'assets/css/custom-styles.css' %}" rel="stylesheet"/>
+    <link href="{% static 'assets/css/fastcheck.css' %}" rel="stylesheet"/>
+
+</head>
+
+<body>
+
+<div id="wrapper">
+    <!-- 头部bar -->
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/admin/index">千图 - 自动化测试平台
+            </a>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right color-white">
+            <li>
+                <a href="/login/" class=" pointer">退出登录</a>
+            </li>
+            <li><span class="mar-rignt-100">{{user}}</span></li>
+        </ul>
+    </nav>
+    <!-- 头部bar end -->
+    <!-- 左侧导航  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+
+                <li>
+                    <a href="/admin/index"><i class="fa fa-dashboard"></i> 系统概括</a>
+                </li>
+                <li>
+                    <a href="/admin/project"><i class="fa fa-desktop"></i> 项目管理</a>
+                </li>
+                <li>
+                    <a href="/admin/page"><i class="fa fa-bar-chart-o"></i> 页面管理</a>
+                </li>
+                <li>
+                    <a href="/admin/element"><i class="fa fa-qrcode"></i> 页面元素</a>
+                </li>
+
+                <li>
+                    <a href="/admin/keyword"><i class="fa fa-table"></i> 关键字库</a>
+                </li>
+                <li>
+                    <a href="/admin/testcase"><i class="fa fa-edit"></i> 测试用例 </a>
+                </li>
+                <li>
+                    <a href="/admin/result"><i class="fa fa-fw fa-file"></i> 测试结果 </a>
+                </li>
+                <li>
+                    <a href="/admin/loginConfig"><i class="fa fa-fw fa-building-o"></i> 登录配置 </a>
+                </li>
+                <li>
+                    <a href="/admin/task"><i class="fa fa-fw fa-sitemap"></i> 任务管理 </a>
+                </li>
+                <li>
+                    <a href="/admin/fastest"><i class="fa fa-fw fa-sitemap"></i> 快速测试 </a>
+                </li>
+                <li>
+                    <a class="active-menu" href="/admin/functionaltesting"><i class="fa fa-fw fa-file"></i> 功能测试 </a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+    <!-- 左侧导航  -->
+    <div id="page-wrapper">
+
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-header">
+                        功能测试
+                    </h1>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <!-- /. 表格  -->
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <!--<div class="panel-heading">表格名字</div>-->
+                        <div class="panel-body" style="min-height:600px">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>用例标题</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                                <th>报告</th>
+                            </tr>
+                            </thead>
+                            <tbody class="console_table"></tbody>
+                        </table>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--console log检测报表-->
+            <div class="function-report">
+                <div class="js-report-table">
+                    <div class="js-report-table-call">
+                        <div class="js-report-prompt">
+                            <p class="model-close report-close" style="background: url({% static 'assets/images/sc7.png' %}) no-repeat;"></p>
+
+                            <div class="check-title">
+<!--                            <span>检测报告</span>-->
+                            </div>
+                            <hr />
+                            <div class="report-table">
+
+                            </div>
+
+                        <hr />
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--consolelog检测报表-->
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+<script src="{% static 'assets/js/jquery-1.10.2.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.metisMenu.js' %}"></script>
+<script src="{% static 'assets/js/morris/raphael-2.1.0.min.js' %}"></script>
+<script src="{% static 'assets/js/morris/morris.js' %}"></script>
+<script src="{% static 'assets/js/dataTables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'assets/js/dataTables/dataTables.bootstrap.js' %}"></script>
+<script src="{% static 'assets/js/custom-scripts.js' %}"></script>
+<script src="{% static 'assets/datetimepicker/bootstrap-datetimepicker.min.js' %}"></script>
+<script src="{% static 'assets/datetimepicker/bootstrap-datetimepicker.zh-CN.js' %}"></script>
+<script src="{% static 'assets/datetimepicker/moment-with-locales(1).js' %}"></script>
+<script src="{% static 'assets/js/fastcheck.js' %}"></script>
+
+
+</body>
+
+<script>
+
+    ListsNew();
+
+    /*列表刷新*/
+    function ListsNew() {
+        var datas = {
+            "pageSize": 99999
+        }
+        var data = JSON.stringify(datas);
+        $.ajax({
+            url: '/api/v1/functionaltesting/get_function_list',
+            type: 'post',
+            dataType: 'json',
+            data: data,
+            success: function (res) {
+                $('#dataTables-example').dataTable().fnClearTable();//清空数据.fnClearTable();//清空数据
+                $('#dataTables-example').dataTable().fnDestroy(); //还原初始化了的datatable
+                for (var i = 0; i < res.data.results.length; i++) {
+                    var result_list = 0;
+                    if (res.data.results[i].params == null) {
+                        result_list = 0;
+                    } else {
+                        result_list = res.data.results[i].params.length;
+                    }
+
+                    $(".console_table").append('<tr class="odd"><td class="center">' + (i + 1) + '</td><td class="center">' + res.data.results[i].functionName + '</td><td class="center">' + res.data.results[i].functionStatus + '</td><td class="center"><a href="javascript:void(0);" data-id="' + res.data.results[i].type + '" onclick="do_test(this)">启动测试</a></td><td class="center"><a class="pointer" href="javascript:void(0);" data-id="' + res.data.results[i].type + '" onclick="report_open(this)">查看报告</a></td></tr>');
+                }
+                $('#dataTables-example').dataTable({
+                    "bPaginate": true,  //是否显示分页
+                    "bSort": true,     //是否支持排序功能
+                    "bAutoWidth": false, //自动宽度
+                    "serverSide": false,
+                    "pageLength": 10,
+                    "sPaginationType": "full_numbers", //分页
+                    "oLanguage": {      //多语言配置
+                        "sLengthMenu": "每页显示 10 条记录",
+                        "sZeroRecords": "对不起，查询不到任何相关数据",
+                        "sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录",
+                        "sInfoEmtpy": "找不到相关数据",
+                        "sInfoFiltered": "数据表中共为 _MAX_ 条记录)",
+                        "sProcessing": "正在加载中...",
+                        "oPaginate": {
+                            "sFirst": "第一页",
+                            "sPrevious": " 上一页 ",
+                            "sNext": " 下一页 ",
+                            "sLast": " 最后一页 "
+                        }
+                    },
+                });
+
+            }
+        });
+    }
+
+    //请求功能测试
+    function do_test(_this) {
+        let TestID = $(_this).attr('data-id');
+        $.ajax({
+            url: '/api/v1/functionaltesting/fun_test/' + TestID,
+            type: 'post',
+            dataType: 'json',
+            success: function (res) {
+                $.qtMessage(res.data, res.message, function () {
+                    window.location.reload()
+            })
+            }
+        })
+    }
+
+    function get_report(ReportID) {
+        $.ajax({
+            url: '/api/v1/functionaltesting/get_report/' + ReportID,
+            type: 'post',
+            dataType: 'json',
+            success: function (res) {
+                //打开报表时先清空一次
+                $(".report-table").children('a').remove();
+                $(".check-title").children('span').remove();
+                for (let i = 0; i < res.data.results.length; i++) {
+                    let report_url = "/static/check_report/test_report/" + res.data.results[i].reportName + ".html";
+                    $(".report-table").append('<a class="report-testing" href="'+report_url +'"  target="_blank">' + res.data.results[i].reportName + '</a>')
+                }
+                try{
+                    if(res.data.results[0].type == 1){
+                        $(".check-title").append('<span>下载检测报告</span>');
+                    }else if(res.data.results[0].type == 2){
+                        $(".check-title").append('<span>首页检测报告</span>');
+                    }else if(res.data.results[0].type == 3){
+                        $(".check-title").append('<span>搜索页检测报告</span>');
+                    }else if(res.data.results[0].type == 4){
+                        $(".check-title").append('<span>分类页检测报告</span>');
+                    }else if(res.data.results[0].type == 5){
+                        $(".check-title").append('<span>详情页检测报告</span>');
+                    }
+                    }catch (err) {
+                     $(".check-title").append('<span>无检测报告</span>');
+                }
+
+            }
+        })
+    }
+
+
+
+
+    //打开report
+    function report_open(_this){
+        let ReportID = $(_this).attr("data-id");
+        $(".function-report").fadeIn(200);
+        get_report(ReportID);
+    }
+
+    //关闭report
+    $('.report-close').click(function(){
+            $(".function-report").fadeOut(200);
+
+        })
+</script>
+</html>

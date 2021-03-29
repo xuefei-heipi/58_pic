@@ -1,0 +1,297 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+{% load static %}
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>快速测试</title>
+    <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet"/>
+    <link href="{% static 'assets/css/font-awesome.css' %}" rel="stylesheet"/>
+    <link href="{% static 'assets/js/morris/morris-0.4.3.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'assets/css/custom-styles.css' %}" rel="stylesheet"/>
+    <link href="{% static 'assets/css/fastcheck.css' %}" rel="stylesheet"/>
+
+</head>
+
+<body>
+<div id="wrapper">
+    <!-- 头部bar -->
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/admin/index">千图 - 自动化测试平台
+            </a>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right color-white">
+            <li>
+                <a href="/login/" class=" pointer">退出登录</a>
+            </li>
+            <li><span class="mar-rignt-100">{{user}}</span></li>
+        </ul>
+    </nav>
+    <!-- 头部bar end -->
+    <!-- 左侧导航  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+
+                <li>
+                    <a href="/admin/index"><i class="fa fa-dashboard"></i> 系统概括</a>
+                </li>
+                <li>
+                    <a href="/admin/project"><i class="fa fa-desktop"></i> 项目管理</a>
+                </li>
+                <li>
+                    <a href="/admin/page"><i class="fa fa-bar-chart-o"></i> 页面管理</a>
+                </li>
+                <li>
+                    <a href="/admin/element"><i class="fa fa-qrcode"></i> 页面元素</a>
+                </li>
+
+                <li>
+                    <a href="/admin/keyword"><i class="fa fa-table"></i> 关键字库</a>
+                </li>
+                <li>
+                    <a href="/admin/testcase"><i class="fa fa-edit"></i> 测试用例 </a>
+                </li>
+                <li>
+                    <a href="/admin/result"><i class="fa fa-fw fa-file"></i> 测试结果 </a>
+                </li>
+                <li>
+                    <a href="/admin/loginConfig"><i class="fa fa-fw fa-building-o"></i> 登录配置 </a>
+                </li>
+                <li>
+                    <a href="/admin/task"><i class="fa fa-fw fa-sitemap"></i> 任务管理 </a>
+                </li>
+                <li>
+                    <a class="active-menu" href="/admin/fastest"><i class="fa fa-fw fa-sitemap"></i> 快速测试 </a>
+                </li>
+                <li>
+                    <a href="/admin/functionaltesting"><i class="fa fa-fw fa-file"></i> 功能测试 </a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+    <!-- 左侧导航  -->
+    <div id="page-wrapper">
+
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-header">
+                        快速测试
+                    </h1>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <!-- /. 表格  -->
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <!--<div class="panel-heading">表格名字</div>-->
+                        <div class="panel-body" style="min-height:600px">
+                            <div>选择测试环境</div>
+                            <div>
+                                <input name="environment" type="radio"  value="online" {{online}} >线上
+                                <input name="environment" type="radio"  value="release" {{release}}>预发布
+                                <input name="environment" type="radio"  value="develop" {{develop}}>测试
+                                <input name="environment" type="radio"  value="web_one" {{web_one}}>web1
+                                <input name="environment" type="radio"  value="web_two" {{web_two}}>web2
+                                <input name="environment" type="radio"  value="web_three" {{web_three}}>web3
+                                <input name="environment" type="radio"  value="web_four" {{web_four}}>web4
+                                <input name="environment" type="radio"  value="web_five" {{web_five}}>web5
+                                <input name="environment" type="radio"  value="web_six" {{web_six}}>web6
+                                <input name="environment" type="radio"  value="web_seven" {{web_seven}}>web7
+                                <input name="environment" type="radio"  value="web_eight" {{web_eight}}>web8
+                                <input name="environment" type="radio"  value="web_nine" {{web_nine}}>web9
+
+                            </div>
+                            <div>
+
+                                <input name="dl_environment" type="radio"  value="online" {{online}} >下载线上
+                                <input name="dl_environment" type="radio"  value="dl_one" {{dl_one}}>下载1「测试」
+                                <input name="dl_environment" type="radio"  value="dl_two" {{dl_two}}>下载2
+                                <input name="dl_environment" type="radio"  value="dl_three" {{dl_three}}>下载3
+
+                            </div>
+                            <div>
+                                <input name="upload_environment" type="radio"  value="online" {{online}} >线上上传
+                                <input name="upload_environment" type="radio"  value="develop" {{develop}}>测试上传
+                                <br/>
+                                <button class="btn btn-console" id="submit"  value="提交" />提交
+                            </div>
+
+                            <hr style="height:1px;border:none;border-top:1px solid #555555;" />
+                            <div>检测 js/css 文件访问是否正常 <span style="color: red; font-size: 10px;"> 温馨提示该功能只能在预发布使用</span></div>
+                            <button class="btn btn-console" id="check_jscss" >检测</button>
+                            <button class="btn btn-console" name="jscss_checktype" disabled="disabled">{{jscss_checktype}}</button>
+                            <a href="js_ignore"><button class="btn btn-console" name="change_ignore" >添加js/css忽略文件</button></a>
+                            <button class="btn btn-console j-model-open" sname="report" >检测结果</button>
+
+                            <hr style="height:1px;border:none;border-top:1px solid #555555;" />
+                            <div>检测页面加载是否有报错</div>
+                            <div style="min-height: 50px; margin-top: 10px">
+                                <input type="text" class="form-control" style="display: inline-block; width: auto" placeholder="用户名" id="username" value={{username}}>
+                                <input type="password" class="form-control" style="display: inline-block; width: auto" placeholder="密码" id="password" value={{password}}>
+                                <button class="btn btn-console" style="margin-top: -3px" id="change_check_user">修改测试账号</button>
+                                <span style="font-size: 12px; color: #BFBFBF;">console log 测试的时候需要登录</span>
+                            </div>
+
+                            <button class="btn btn-console" id="check_console" >检测</button>
+                            <button class="btn btn-console" name="console_checktype" disabled="disabled">{{console_checktype}}</button>
+                            <a href="console_ignore"><button class="btn btn-console" name="check_ignore" >添加忽略报错</button></a>
+                            <a href="console_url"><button class="btn btn-console" name="check_url" >添加检测url</button></a>
+                            <button class="btn btn-console console-model-open" name="report" >检测结果</button>
+
+<!--                            js检测报表-->
+                            <div class="js-report-t">
+                                <div class="js-report-table">
+                                    <div class="js-report-table-call">
+                                        <div class="js-report-prompt">
+                                            <p class="model-close j-model-close" style="background: url({% static 'assets/images/sc7.png' %}) no-repeat;"></p>
+
+                                            <div class="check-title">
+                                            <span >JS CSS 图片等文件检测报告</span>
+                                        </div>
+                                            <hr />
+                                            <div >
+                                                <table class="js-css-table">
+                                                    <tr>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>检测文件数量</th>
+                                                        <th>出错文件数量</th>
+                                                        <th>检测文件详情</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{j_start_time}}</td>
+                                                        <td>{{j_end_time}}</td>
+                                                        <td>{{j_check_file_num}}</td>
+                                                        <td style="color: red">{{j_error_file_num}}</td>
+                                                        <td><a href="{% static 'check_report\js_report\sourcemap.html' %}" target="_blank">详细链接</a></td>
+                                                    </tr>
+                                                </table>
+                                                <hr/>
+
+                                                <!-- JS CSS 资源文件详细出错链接-->
+                                                <div style="height: 300px; overflow-y:scroll">
+                                                    <table class="js-error-table">
+                                                        <tr>
+                                                            <th style="width: 50px">序号</th>
+                                                            <th>出错文件</th>
+
+                                                        </tr>
+                                                        {% for detail in js_css_detail %}
+                                                        <tr style="border-top: 1px solid #BFBFBF">
+                                                            <td>{{forloop.counter}}</td>
+                                                            <td>{{detail.errorInfo}}</td>
+                                                        </tr>
+
+                                                        {% endfor %}
+                                                    </table>
+                                                </div>
+                                                <hr />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+<!--                            js检测报表-->
+
+<!--                            console log检测报表-->
+                            <div class="console-report-t">
+                                <div class="console-report-table">
+                                    <div class="console-report-table-call">
+                                        <div class="console-report-prompt">
+                                            <p class="model-close console-model-close" style="background: url({% static 'assets/images/sc7.png' %}) no-repeat;"></p>
+
+                                            <div class="check-title">
+                                            <span >Console log 检测报告</span>
+                                        </div>
+                                            <hr />
+                                            <div >
+                                                <table class="js-css-table">
+                                                    <tr>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>检测url数量</th>
+                                                        <th>出错url数量</th>
+                                                    <!--<th>检测文件详情</th>-->
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{c_start_time}}</td>
+                                                        <td>{{c_end_time}}</td>
+                                                        <td>{{c_check_file_num}}</td>
+                                                        <td style="color: red">{{c_error_file_num}}</td>
+                                                    </tr>
+                                                </table>
+                                                <hr/>
+
+                                                <!-- console log 详细报错数据-->
+                                                <div style="height: 500px; overflow-y:scroll">
+                                                    <table class="js-error-table" >
+                                                        <tr>
+                                                            <th style="width: 50px">序号</th>
+                                                            <th>出错文件</th>
+
+                                                        </tr>
+                                                        {% for detail in con_detail %}
+                                                        <tr style="border-top: 1px solid #BFBFBF">
+                                                            <td>{{forloop.counter}}</td>
+                                                            <td>{{detail.errorInfo}}</td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </table>
+                                                </div>
+                                                <hr />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+<!--                            consolelog检测报表-->
+
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+
+            <!-- /. 表格  -->
+            <footer>
+                <p class="text-center"></p>
+            </footer>
+        </div>
+
+
+
+
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+
+<script src="{% static 'assets/js/jquery-1.10.2.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.metisMenu.js' %}"></script>
+<script src="{% static 'assets/js/morris/raphael-2.1.0.min.js' %}"></script>
+<script src="{% static 'assets/js/morris/morris.js' %}"></script>
+<script src="{% static 'assets/js/dataTables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'assets/js/dataTables/dataTables.bootstrap.js' %}"></script>
+<script src="{% static 'assets/js/custom-scripts.js' %}"></script>
+<script src="{% static 'assets/datetimepicker/bootstrap-datetimepicker.min.js' %}"></script>
+<script src="{% static 'assets/datetimepicker/bootstrap-datetimepicker.zh-CN.js' %}"></script>
+<script src="{% static 'assets/datetimepicker/moment-with-locales(1).js' %}"></script>
+<script src="{% static 'assets/js/fastcheck.js' %}"></script>
+
+
+</body>
+
+</html>
