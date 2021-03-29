@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+{% load static %}
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>新建Console Error Ignore文件</title>
+    <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet"/>
+    <link href="{% static 'assets/css/font-awesome.css' %}" rel="stylesheet"/>
+    <link href="{% static 'assets/js/morris/morris-0.4.3.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'assets/css/custom-styles.css' %}" rel="stylesheet"/>
+
+</head>
+
+<body>
+<div id="wrapper">
+    <!-- 头部bar -->
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/admin/index">千图 - 自动化测试平台
+            </a>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right color-white">
+            <li>
+                <a href="/login/" class=" pointer">退出登录</a>
+            </li>
+            <li><span class="mar-rignt-100">{{user}}</span></li>
+        </ul>
+    </nav>
+    <!-- 头部bar end -->
+    <!-- 左侧导航  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+
+                <li>
+                    <a href="/admin/index"><i class="fa fa-dashboard"></i> 系统概括</a>
+                </li>
+                <li>
+                    <a href="/admin/project"><i class="fa fa-desktop"></i> 项目管理</a>
+                </li>
+                <li>
+                    <a href="/admin/page"><i class="fa fa-bar-chart-o"></i> 页面管理</a>
+                </li>
+                <li>
+                    <a href="/admin/element"><i class="fa fa-qrcode"></i> 页面元素</a>
+                </li>
+
+                <li>
+                    <a href="/admin/keyword"><i class="fa fa-table"></i> 关键字库</a>
+                </li>
+                <li>
+                    <a href="/admin/testcase"><i class="fa fa-edit"></i> 测试用例 </a>
+                </li>
+                <li>
+                    <a href="/admin/result"><i class="fa fa-fw fa-file"></i> 测试结果 </a>
+                </li>
+                <li>
+                    <a href="/admin/loginConfig"><i class="fa fa-fw fa-building-o"></i> 登录配置 </a>
+                </li>
+                <li>
+                    <a href="/admin/task"><i class="fa fa-fw fa-sitemap"></i> 任务管理 </a>
+                </li>
+                <li>
+                    <a class="active-menu" href="/admin/fastest"><i class="fa fa-fw fa-sitemap"></i> 快速测试 </a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+    <!-- 左侧导航  -->
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-header">
+                        <a href="/admin/fastest">快速测试</a> - <a href="/admin/console_ignore"> Console 报错忽略</a> - 新建Console Error Ignore文件
+                    </h1>
+                </div>
+            </div>
+            <!--内容-->
+            <!--内容-->
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <!--<div class="panel-heading">表格名字</div>-->
+                        <div class="panel-body width-p8" style="min-height:600px">
+                            <form class="form-horizontal" role="form">
+<!--                                url链接-->
+                                <div class="form-group">
+                                    <label for="firstname" class="col-sm-2 control-label">忽略报错内容</label>
+                                    <div class="col-sm-10">
+                                        <input id='ignore-content' type="text" class="form-control" placeholder="例:api.share.baidu.com">
+                                    </div>
+                                </div>
+<!--                                url链接-->
+<!--                                忽略文件备注-->
+                                <div class="form-group">
+                                    <label for="lastname" class="col-sm-2 control-label">备注信息</label>
+                                    <div class="col-sm-10">
+                                        <textarea id="remark" class="form-control" rows="3"></textarea>
+                                    </div>
+                                </div>
+<!--                                忽略文件备注-->
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"></label>
+                                    <div id='message' class="col-sm-10 js_message text-danger">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastname" class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-10">
+                                        <button type="button" class="btn btn-primary mar-rignt-20" 
+                                                onclick="createUrl()">保存
+                                        </button>
+                                        <button type="button" class="btn btn-default"
+                                                onclick="javascript:window.location.href='/admin/console_ignore'">取消
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </form>
+                            <div id="params" style="display: none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+
+
+
+
+<script src="{% static 'assets/js/jquery-1.10.2.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.metisMenu.js' %}"></script>
+<script src="{% static 'assets/js/morris/raphael-2.1.0.min.js' %}"></script>
+<script src="{% static 'assets/js/morris/morris.js' %}"></script>
+<script src="{% static 'assets/js/dataTables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'assets/js/dataTables/dataTables.bootstrap.js' %}"></script>
+<script src="{% static 'assets/js/custom-scripts.js' %}"></script>
+<script src="{% static 'assets/datetimepicker/bootstrap-datetimepicker.min.js' %}"></script>
+<script src="{% static 'assets/datetimepicker/bootstrap-datetimepicker.zh-CN.js' %}"></script>
+<script src="{% static 'assets/datetimepicker/moment-with-locales(1).js' %}"></script>
+
+<script>
+    function createUrl() {
+        var ignore_content, remark;
+        ignore_content = $("#ignore-content").val();
+        remark = $("#remark").val();
+        var data = {
+            "ignore_content": ignore_content,
+            "remark": remark,
+        }
+        $.ajax({
+            url: '/api/v1/fastest/console_ignore/create',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify(data),
+            success: function (res) {
+                if (res.code == 200) {
+                    $("#message").html("添加成功,即将跳转到列表页");
+                    setTimeout(function () {
+                        window.location.href = '/admin/console_ignore';
+                    }, 1000)
+                } else {
+                    $("#message").html(res.message);
+                }
+            }
+        });
+    }
+</script>
+
+
+
+</body>
+
+</html>

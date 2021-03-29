@@ -1,0 +1,12 @@
+python D:\ATP_project\Autotest_platform\manage.py runserver 80	#启动django
+python D:\ATP_project\Autotest_platform\manage.py celeryd -l info	#（注意要处于项目根目录下）
+http://127.0.0.1:8000/login/ 	 	#登录链接   默认用户：少年	密码： sn123456
+
+http://localhost:15672	#RabbitMQ 页面   默认用户：guest	密码：guest
+cd E:\RabbitMQ Server\rabbitmq_server-3.7.7\sbin
+rabbitmq-plugins enable rabbitmq_management
+
+
+python manage.py makemigrations
+
+python manage.py migrate
